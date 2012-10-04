@@ -1,4 +1,6 @@
 class git {
+  include boxen::config
+
   $configdir = "${boxen::config::configdir}/git"
   $credentialhelper = "${boxen::config::bindir}/boxen-git-credential"
 
