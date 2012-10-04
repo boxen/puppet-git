@@ -20,3 +20,9 @@ git::config::global { 'user.email':
   value  => 'awesome@thebomb.com'
 }
 ```
+
+## Developing
+
+Write code.
+
+Run `script/cibuild`.
