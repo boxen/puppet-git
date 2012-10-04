@@ -1,0 +1,3 @@
+# FIXME - We should probably pull directly from the forge
+mod 'inifile', '0.0.1',  :github_tarball => 'boxen/puppet-inifile'
+mod 'boxen',   '0.0.12', :github_tarball => 'boxen/puppet-boxen'
