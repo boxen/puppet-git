@@ -1,6 +1,6 @@
 class git {
   $configdir = "${boxen::config::configdir}/git"
-  $credentialhelper = "${boxen::config::bindir}/gh-setup-git-credential"
+  $credentialhelper = "${boxen::config::bindir}/boxen-git-credential"
 
   package { 'boxen/brews/git':
     ensure => '1.7.10.4-boxen1'
@@ -12,7 +12,7 @@ class git {
 
   file { $credentialhelper:
     ensure => link,
-    target => "${boxen::config::home}/setup/script/setup-git-credential"
+    target => "${boxen::config::repodir}/script/boxen-git-credential"
   }
 
   file { "${configdir}/gitignore":
