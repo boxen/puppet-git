@@ -1,3 +1,8 @@
+# Public: Install and configure git from homebrew.
+#
+# Examples
+#
+#   include git
 class git {
   include boxen::config
 
