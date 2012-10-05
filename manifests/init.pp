@@ -7,7 +7,7 @@ class git {
   include boxen::config
 
   $configdir = "${boxen::config::configdir}/git"
-  $credentialhelper = "${boxen::config::srcdir}/script/boxen-git-credential"
+  $credentialhelper = "${boxen::config::repodir}/script/boxen-git-credential"
 
   package { 'boxen/brews/git':
     ensure => '1.7.10.4-boxen1'
