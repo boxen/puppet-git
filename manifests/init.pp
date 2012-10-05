@@ -7,7 +7,7 @@ class git {
   include boxen::config
 
   $configdir = "${boxen::config::configdir}/git"
-  $credentialhelper = "${boxen::config::bindir}/boxen-git-credential"
+  $credentialhelper = "${::boxen_home}/bin/boxen-git-credential"
 
   package { 'boxen/brews/git':
     ensure => '1.7.10.4-boxen1'
@@ -18,8 +18,8 @@ class git {
   }
 
   file { $credentialhelper:
-    ensure => link,
-    target => "${boxen::config::repodir}/script/boxen-git-credential"
+    source => "puppet:///modules/git/boxen-git-credential",
+    before => Package['boxen/brews/git']
   }
 
   file { "${configdir}/gitignore":
