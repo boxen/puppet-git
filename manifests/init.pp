@@ -8,6 +8,7 @@ class git {
 
   $configdir = "${boxen::config::configdir}/git"
   $credentialhelper = "${boxen::config::repodir}/script/boxen-git-credential"
+  $global_credentialhelper = "${boxen::config::home}/bin/boxen-git-credential"
 
   package { 'boxen/brews/git':
     ensure => '1.7.10.4-boxen1'
@@ -18,9 +19,14 @@ class git {
   }
 
   file { $credentialhelper:
-    ensure => link,
-    target => "${boxen::config::home}/bin/boxen-git-credential",
-    before => Package['boxen/brews/git']
+    ensure => file
+  }
+
+  file { $global_credentialhelper:
+    ensure  => link,
+    target  => $credentialhelper,
+    before  => Package['boxen/brews/git'],
+    require => File[$credentialhelper]
   }
 
   file { "${configdir}/gitignore":
@@ -29,7 +35,7 @@ class git {
   }
 
   git::config::global{ 'credential.helper':
-    value => $credentialhelper
+    value => $global_credentialhelper
   }
 
   git::config::global{ 'core.excludesfile':
