@@ -11,7 +11,7 @@ class git {
   $global_credentialhelper = "${boxen::config::home}/bin/boxen-git-credential"
 
   package { 'boxen/brews/git':
-    ensure => '1.7.10.4-boxen1'
+    ensure => '1.8.0-boxen1'
   }
 
   file { $configdir:

@@ -13,7 +13,7 @@ describe 'git' do
 
   it { should include_class('boxen::config') }
   it do
-    should contain_package('boxen/brews/git').with_ensure('1.7.10.4-boxen1')
+    should contain_package('boxen/brews/git').with_ensure('1.8.0-boxen1')
   end
 
   it { should contain_file(configdir).with_ensure('directory') }
