@@ -11,42 +11,39 @@ describe 'git' do
     }
   end
 
-  it { should include_class('boxen::config') }
   it do
+    should include_class('homebrew')
+    should include_class('git::config')
+
+    should contain_homebrew__formula('git')
+
     should contain_package('boxen/brews/git').with_ensure('1.8.0-boxen1')
-  end
 
-  it { should contain_file(configdir).with_ensure('directory') }
+    should contain_file(configdir).with_ensure('directory')
 
-  it do
     should contain_file("#{boxenhome}/bin/boxen-git-credential").with({
       :ensure => 'link',
       :target => "#{repodir}/script/boxen-git-credential",
     })
-  end
 
-  it do
     should contain_file("#{configdir}/gitignore").with({
       :source  => 'puppet:///modules/git/gitignore',
       :require => "File[#{configdir}]",
     })
-  end
 
-  it do
     should contain_git__config__global('credential.helper').with({
       :value => "#{boxenhome}/bin/boxen-git-credential",
     })
-  end
 
-  it do
     should contain_git__config__global('core.excludesfile').with({
       :value   => "#{configdir}/gitignore",
       :require => "File[#{configdir}/gitignore]",
     })
-  end
 
-  it { should_not contain_git__config__global('user.name') }
-  it { should_not contain_git__config__global('user.email') }
+
+    should_not contain_git__config__global('user.name')
+    should_not contain_git__config__global('user.email')
+  end
 
   context 'when gname fact is set' do
     let(:facts) do

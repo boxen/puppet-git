@@ -1,7 +1,10 @@
 /.bundle/
+/.ruby-version
 /bin/
 /spec/fixtures/.librarian/
 /spec/fixtures/.tmp/
 /spec/fixtures/vendor/
 /spec/fixtures/modules/boxen/
+/spec/fixtures/modules/homebrew/
 /spec/fixtures/modules/inifile/
+/spec/fixtures/modules/stdlib/
