@@ -4,43 +4,44 @@
 #
 #   include git
 class git {
-  include boxen::config
+  require homebrew
+  require git::config
 
-  $configdir = "${boxen::config::configdir}/git"
-  $credentialhelper = "${boxen::config::repodir}/script/boxen-git-credential"
-  $global_credentialhelper = "${boxen::config::home}/bin/boxen-git-credential"
+  homebrew::formula { 'git':
+    before => Package['boxen/brews/git'],
+  }
 
   package { 'boxen/brews/git':
     ensure => '1.8.0-boxen1'
   }
 
-  file { $configdir:
+  file { $git::config::configdir:
     ensure => directory
   }
 
-  file { $credentialhelper:
+  file { $git::config::credentialhelper:
     ensure => file
   }
 
-  file { $global_credentialhelper:
+  file { $git::config::global_credentialhelper:
     ensure  => link,
-    target  => $credentialhelper,
+    target  => $git::config::credentialhelper,
     before  => Package['boxen/brews/git'],
-    require => File[$credentialhelper]
+    require => File[$git::config::credentialhelper]
   }
 
-  file { "${configdir}/gitignore":
+  file { "${git::config::configdir}/gitignore":
     source  => 'puppet:///modules/git/gitignore',
-    require => File[$configdir]
+    require => File[$git::config::configdir]
   }
 
   git::config::global{ 'credential.helper':
-    value => $global_credentialhelper
+    value => $git::config::global_credentialhelper
   }
 
   git::config::global{ 'core.excludesfile':
-    value   => "${configdir}/gitignore",
-    require => File["${configdir}/gitignore"]
+    value   => "${git::config::configdir}/gitignore",
+    require => File["${git::config::configdir}/gitignore"]
   }
 
   if $::gname {
