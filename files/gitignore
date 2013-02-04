@@ -6,3 +6,5 @@
 Icon?
 Thumbs.db
 ehthumbs.db
+*.swp
+*.swo
