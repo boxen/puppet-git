@@ -1,6 +1,6 @@
 # Git Puppet Module for Boxen
 
-Install [Git](), a stupid content tracker.
+Install [Git](http://git-scm.com), a stupid content tracker.
 
 ## Usage
 
