@@ -1,9 +1,6 @@
 # Git Puppet Module for Boxen
 
-Requires the following boxen modules:
-
-* `boxen`
-* `homebrew`
+Install [Git](), a stupid content tracker.
 
 ## Usage
 
@@ -13,16 +10,20 @@ include git
 git::config:local { '/path/to/my/repo':
   ensure => present,
   key    => 'user.email',
-  value  => 'awesome@thebomb.com'
+  value  => 'turnt@example.com'
 }
 
 git::config::global { 'user.email':
-  value  => 'awesome@thebomb.com'
+  value  => 'turnt@example.com'
 }
 ```
 
-## Developing
+## Required Puppet Modules
 
-Write code.
+* `boxen`
+* `homebrew`
 
-Run `script/cibuild`.
+## Development
+
+Write code. Run `script/cibuild` to test it. Check the `script`
+directory for other useful tools.
