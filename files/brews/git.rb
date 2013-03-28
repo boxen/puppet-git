@@ -21,6 +21,8 @@ class Git < Formula
   depends_on 'gettext' => :optional
 
   option 'with-blk-sha1', 'Compile with the block-optimized SHA1 implementation'
+  option 'without-completions', 'Disable bash/zsh completions from "contrib" directory'
+
 
   def install
     # If these things are installed, tell Git build system to not use them
