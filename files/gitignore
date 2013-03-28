@@ -9,3 +9,5 @@ ehthumbs.db
 *.swp
 *.swo
 *.orig
+*~
+\#*\#
