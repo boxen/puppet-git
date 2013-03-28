@@ -7,7 +7,7 @@ Install [Git](http://git-scm.com), a stupid content tracker.
 ```puppet
 include git
 
-git::config:local { '/path/to/my/repo':
+git::config::local { '/path/to/my/repo':
   ensure => present,
   key    => 'user.email',
   value  => 'turnt@example.com'
