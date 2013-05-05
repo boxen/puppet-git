@@ -17,7 +17,7 @@ describe 'git' do
 
     should contain_homebrew__formula('git')
 
-    should contain_package('boxen/brews/git').with_ensure('1.8.2.1-boxen1')
+    should contain_package('boxen/brews/git').with_ensure('1.8.2.2-boxen1')
 
     should contain_file(configdir).with_ensure('directory')
 
