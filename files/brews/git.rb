@@ -1,23 +1,24 @@
 require 'formula'
 
 class GitManuals < Formula
-  url 'http://git-core.googlecode.com/files/git-manpages-1.8.2.tar.gz'
-  sha1 'a10083a2a1fe6b35919fd6765f25dec18f4fa752'
+  url 'http://git-core.googlecode.com/files/git-manpages-1.8.2.3.tar.gz'
+  sha1 'eb04a2540ff9998e0887a4b862641ac1db723f3e'
 end
 
 class GitHtmldocs < Formula
-  url 'http://git-core.googlecode.com/files/git-htmldocs-1.8.2.tar.gz'
-  sha1 'db1ca968f492f7ad1d4e0c13d07f23c745d10b74'
+  url 'http://git-core.googlecode.com/files/git-htmldocs-1.8.2.3.tar.gz'
+  sha1 'b8d6b3c4077d37b34bf08b6eb53c4ee5901fa2f9'
 end
 
 class Git < Formula
   homepage 'http://git-scm.com'
-  url 'http://git-core.googlecode.com/files/git-1.8.2.tar.gz'
-  sha1 '42960ec7c2d8404af3d3f6d21f32f1e97e6e0a96'
+  url 'http://git-core.googlecode.com/files/git-1.8.2.3.tar.gz'
+  sha1 '2831f7deec472db4d0d0cdffb4d82d91cecdf295'
 
-  version '1.8.2-boxen1'
+  version '1.8.2.3-boxen1'
 
   depends_on 'pcre' => :optional
+  depends_on 'gettext' => :optional
 
   option 'with-blk-sha1', 'Compile with the block-optimized SHA1 implementation'
 
@@ -27,7 +28,6 @@ class Git < Formula
     ENV['NO_DARWIN_PORTS'] = '1'
     ENV['V'] = '1' # build verbosely
     ENV['NO_R_TO_GCC_LINKER'] = '1' # pass arguments to LD correctly
-    ENV['NO_GETTEXT'] = '1'
     ENV['PERL_PATH'] = which 'perl' # workaround for users of perlbrew
     ENV['PYTHON_PATH'] = which 'python' # python can be brewed or unbrewed
 
@@ -40,6 +40,8 @@ class Git < Formula
       ENV['USE_LIBPCRE'] = '1'
       ENV['LIBPCREDIR'] = HOMEBREW_PREFIX
     end
+
+    ENV['NO_GETTEXT'] = '1' unless build.with? 'gettext'
 
     system "make", "prefix=#{prefix}",
                    "CC=#{ENV.cc}",
