@@ -14,7 +14,7 @@
 #   }
 define git::config::global($value) {
   $split_key = split($name, '\.')
-  $path = "/Users/${::luser}/.gitconfig"
+  $path = "/Users/${::boxen_user}/.gitconfig"
 
   ini_setting { "set ${name} to ${value} in ${path}":
     ensure  => present,
