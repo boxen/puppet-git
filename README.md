@@ -1,5 +1,7 @@
 # Git Puppet Module for Boxen
 
+[![Build Status](https://travis-ci.org/boxen/puppet-git.png)](https://travis-ci.org/boxen/puppet-git)
+
 Install [Git](http://git-scm.com), a stupid content tracker.
 
 ## Usage
