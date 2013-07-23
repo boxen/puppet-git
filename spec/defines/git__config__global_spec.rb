@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'git::config::global' do
   let(:title) { 'user.name' }
   let(:params) { {:value => 'Hugh Bot'} }
-  let(:facts) { {:luser => 'hubot'} }
+  let(:facts) { {:boxen_user => 'hubot'} }
 
   let(:path) { '/Users/hubot/.gitconfig' }
 
