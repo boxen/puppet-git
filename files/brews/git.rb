@@ -17,12 +17,12 @@ class Git < Formula
 
   version '1.8.4-boxen1'
 
+  depends_on :python
   depends_on 'pcre' => :optional
   depends_on 'gettext' => :optional
 
   option 'with-blk-sha1', 'Compile with the block-optimized SHA1 implementation'
   option 'without-completions', 'Disable bash/zsh completions from "contrib" directory'
-
 
   def install
     # If these things are installed, tell Git build system to not use them
