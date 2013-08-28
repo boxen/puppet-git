@@ -17,7 +17,6 @@ class Git < Formula
 
   version '1.8.4-boxen1'
 
-  depends_on :python
   depends_on 'pcre' => :optional
   depends_on 'gettext' => :optional
 
@@ -30,7 +29,7 @@ class Git < Formula
     ENV['NO_DARWIN_PORTS'] = '1'
     ENV['V'] = '1' # build verbosely
     ENV['NO_R_TO_GCC_LINKER'] = '1' # pass arguments to LD correctly
-    ENV['PYTHON_PATH'] = python.binary if python
+    ENV['PYTHON_PATH'] =  which 'python' # python can be brewed or unbrewed
     ENV['PERL_PATH'] = which 'perl'
 
     unless quiet_system ENV['PERL_PATH'], '-e', 'use ExtUtils::MakeMaker'
@@ -91,9 +90,9 @@ class Git < Formula
     EOS
   end
 
-  test do
+  def test
     HOMEBREW_REPOSITORY.cd do
-      assert_equal 'bin/brew', `#{bin}/git ls-files -- bin`.strip
+      `#{bin}/git ls-files -- bin`.chomp == 'bin/brew'
     end
   end
 end
