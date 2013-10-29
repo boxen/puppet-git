@@ -12,7 +12,7 @@
 #   git::config::system { 'http.sslVerify':
 #     value => 'false',
 #   }
-define git::system::global($value) {
+define git::config::system($value) {
   $split_key = split($name, '\.')
   $path = "/etc/gitconfig"
 
