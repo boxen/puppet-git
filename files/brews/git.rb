@@ -7,7 +7,7 @@ end
 
 class GitHtmldocs < Formula
   url 'http://git-core.googlecode.com/files/git-htmldocs-1.8.4.2.tar.gz'
-  sha1 'b0d5e7e24aba1af4a8e1a4fa9c894c3a673bf5d8g'
+  sha1 'b0d5e7e24aba1af4a8e1a4fa9c894c3a673bf5d8'
 end
 
 class Git < Formula
