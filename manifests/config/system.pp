@@ -14,13 +14,15 @@
 #   }
 define git::config::system($value) {
   $split_key = split($name, '\.')
-  $path = "/etc/gitconfig"
+  $section = join(delete_at($split_key, size($split_key) - 1), '.')
+  $setting = $split_key[-1]
+  $path = '/etc/gitconfig'
 
   ini_setting { "set ${name} to ${value} in ${path}":
     ensure  => present,
     path    => $path,
-    section => $split_key[0],
-    setting => $split_key[1],
+    section => $section,
+    setting => $setting,
     value   => $value,
   }
 }

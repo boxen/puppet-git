@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe 'git::config::system' do
   let(:title) { 'http.proxy' }
-  let(:facts) { { :boxen_user => 'hubot' } }
   let(:params) { { :value => 'proxy.corporate.com:80' } }
   let(:path) { '/etc/gitconfig' }
 
