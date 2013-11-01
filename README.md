@@ -9,8 +9,9 @@ Install [Git](http://git-scm.com), a stupid content tracker.
 ```puppet
 include git
 
-git::config::local { '/path/to/my/repo':
+git::config::local { 'repo_specific_email':
   ensure => present,
+  repo   => '/path/to/my/repo',
   key    => 'user.email',
   value  => 'turnt@example.com'
 }
