@@ -1,21 +1,21 @@
 require 'formula'
 
 class GitManuals < Formula
-  url 'http://git-core.googlecode.com/files/git-manpages-1.8.4.2.tar.gz'
-  sha1 'aebbb6dc8bca979f8d54bdef51b128deba195c94'
+  url 'http://git-core.googlecode.com/files/git-manpages-1.8.4.3.tar.gz'
+  sha1 '3a7e9322a95e0743b902152083366fe97f322ab1'
 end
 
 class GitHtmldocs < Formula
-  url 'http://git-core.googlecode.com/files/git-htmldocs-1.8.4.2.tar.gz'
-  sha1 'b0d5e7e24aba1af4a8e1a4fa9c894c3a673bf5d8'
+  url 'http://git-core.googlecode.com/files/git-htmldocs-1.8.4.3.tar.gz'
+  sha1 'eb4eb4991464f44deda19d1435d9721146587661'
 end
 
 class Git < Formula
   homepage 'http://git-scm.com'
-  url 'http://git-core.googlecode.com/files/git-1.8.4.2.tar.gz'
-  sha1 'f2e9317703553b4215700605c15d0f3a30623a9d'
+  url 'http://git-core.googlecode.com/files/git-1.8.4.3.tar.gz'
+  sha1 '43b1edc95b3ab77f9739d789b906ded0585fe7a2'
 
-  version '1.8.4-boxen1'
+  version '1.8.4-boxen2'
 
   depends_on 'pcre' => :optional
   depends_on 'gettext' => :optional
