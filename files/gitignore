@@ -11,4 +11,4 @@ ehthumbs.db
 *.orig
 *~
 \#*\#
-tags
+/tags
