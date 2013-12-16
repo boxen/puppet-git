@@ -24,6 +24,7 @@ git::config::global { 'user.email':
 
 * `boxen`
 * `homebrew`
+* `ini_setting`
 
 ## Development
 
