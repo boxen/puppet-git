@@ -1,8 +1,9 @@
 # Public: Set a git configuration option for a specific repository.
 #
-# namevar - The String path to the git repository.
+# namevar - Will be used as the String path to the git repository if repo is not defined.
 # key     - The String name of the configuration option.
 # value   - The String value of the configuration option.
+# repo    - The String path to the git repository.
 # ensure  - The desired state of the resource as a String.  Valid values are
 #           'present' and 'absent' (default: 'present').
 #
@@ -12,15 +13,12 @@
 #     key   => 'user.name',
 #     value => 'Hugh Bot',
 #   }
-#
-# FIXME - Using namevar like this means you can only set 1 option per repo,
-#         not exactly ideal.
-define git::config::local($key, $value, $ensure = present) {
+define git::config::local($key, $value, $repo = $name, $ensure = present) {
   $split_key = split($key, '\.')
 
-  ini_setting { "set ${key} to ${value} in ${name}":
+  ini_setting { "set ${key} to ${value} in ${repo}":
     ensure  => $ensure,
-    path    => "${name}/.git/config",
+    path    => "${repo}/.git/config",
     section => $split_key[0],
     setting => $split_key[1],
     value   => $value
