@@ -9,6 +9,7 @@ describe 'git::config::local' do
       :ensure => 'present',
     }
   end
+  let(:facts) { default_test_facts }
 
   it do
     namevar = "set #{params[:key]} to #{params[:value]} in #{title}"

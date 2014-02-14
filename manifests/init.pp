@@ -3,7 +3,12 @@
 # Examples
 #
 #   include git
-class git {
+class git (
+  $version                 = $git::params::version,
+  $configdir               = $git::params::configdir,
+  $credentialhelper        = $git::params::credentialhelper,
+  $global_credentialhelper = $git::params::global_credentialhelper,
+) inherits git::params {
   include homebrew
   include git::config
 
@@ -12,36 +17,36 @@ class git {
   }
 
   package { 'boxen/brews/git':
-    ensure => $git::config::version
+    ensure => $version
   }
 
-  file { $git::config::configdir:
+  file { $configdir:
     ensure => directory
   }
 
-  file { $git::config::credentialhelper:
+  file { $credentialhelper:
     ensure => file
   }
 
-  file { $git::config::global_credentialhelper:
+  file { $global_credentialhelper:
     ensure  => link,
-    target  => $git::config::credentialhelper,
+    target  => $credentialhelper,
     before  => Package['boxen/brews/git'],
-    require => File[$git::config::credentialhelper]
+    require => File[$credentialhelper]
   }
 
-  file { "${git::config::configdir}/gitignore":
+  file { "${configdir}/gitignore":
     source  => 'puppet:///modules/git/gitignore',
-    require => File[$git::config::configdir]
+    require => File[$configdir]
   }
 
   git::config::global{ 'credential.helper':
-    value => $git::config::global_credentialhelper
+    value => $global_credentialhelper
   }
 
   git::config::global{ 'core.excludesfile':
-    value   => "${git::config::configdir}/gitignore",
-    require => File["${git::config::configdir}/gitignore"]
+    value   => "${configdir}/gitignore",
+    require => File["${configdir}/gitignore"]
   }
 
   if $::gname {

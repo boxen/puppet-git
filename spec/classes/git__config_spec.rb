@@ -5,11 +5,11 @@ describe 'git::config' do
   let(:configdir) { "#{boxenhome}/config/git" }
   let(:repodir) { "#{boxenhome}/repo" }
   let(:facts) do
-    {
+    default_test_facts.merge(
       :boxen_home    => boxenhome,
       :boxen_repodir => repodir,
       :boxen_user    => 'wfarr',
-    }
+    )
   end
 
   it do
