@@ -16,9 +16,4 @@ class git::params {
       fail('Unsupported operating system!')
     }
   }
-
-  $ensure = present
-  $host   = $::ipaddress_lo0
-  $enable = true
-
 }
