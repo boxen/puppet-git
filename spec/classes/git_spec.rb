@@ -5,10 +5,10 @@ describe 'git' do
   let(:configdir) { "#{boxenhome}/config/git" }
   let(:repodir) { "#{boxenhome}/repo" }
   let(:facts) do
-    {
+    default_test_facts.merge({
       :boxen_home    => boxenhome,
       :boxen_repodir => repodir,
-    }
+    })
   end
 
   it do
@@ -47,11 +47,11 @@ describe 'git' do
 
   context 'when gname fact is set' do
     let(:facts) do
-      {
+      default_test_facts.merge({
         :boxen_home    => boxenhome,
         :boxen_repodir => repodir,
         :gname         => 'Hugh Bot',
-      }
+      })
     end
 
     it do
@@ -63,11 +63,11 @@ describe 'git' do
 
   context 'when gemail fact is set' do
     let(:facts) do
-      {
+      default_test_facts.merge({
         :boxen_home    => boxenhome,
         :boxen_repodir => repodir,
         :gemail        => 'test@example.com',
-      }
+      })
     end
 
     it do
