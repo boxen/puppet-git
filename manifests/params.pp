@@ -8,6 +8,7 @@ class git::params {
       $configdir = "${boxen::config::configdir}/git"
       $credentialhelper = "${boxen::config::repodir}/script/boxen-git-credential"
       $global_credentialhelper = "${boxen::config::home}/bin/boxen-git-credential"
+      $global_excludesfile = "${configdir}/gitignore"
 
       $version = '1.8.4-boxen2'
     }
