@@ -45,6 +45,16 @@ describe 'git' do
     should_not contain_git__config__global('user.email')
   end
 
+  context 'when the global_excludesfile parameter is set' do
+    let(:params) {{ :'global_excludesfile' => '/some/other/file' }}
+
+    it do
+      should contain_git__config__global('core.excludesfile').with({
+	:value => '/some/other/file'
+      })
+    end
+  end
+
   context 'when gname fact is set' do
     let(:facts) do
       default_test_facts.merge({
