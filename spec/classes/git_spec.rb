@@ -46,7 +46,7 @@ describe 'git' do
   end
 
   context 'when the global_excludesfile parameter is set' do
-    let(:params) {{ :'global_excludesfile' => '/some/other/file' }}
+    let(:params) {{ :global_excludesfile => '/some/other/file' }}
 
     it do
       should contain_git__config__global('core.excludesfile').with({
