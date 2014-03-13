@@ -14,10 +14,10 @@ class git (
   include git::config
 
   homebrew::formula { 'git':
-    before => Package['boxen/brews/git'],
+    before => Package['git'],
   }
 
-  package { 'boxen/brews/git':
+  package { 'git':
     ensure => $version
   }
 
@@ -32,7 +32,7 @@ class git (
   file { $global_credentialhelper:
     ensure  => link,
     target  => $credentialhelper,
-    before  => Package['boxen/brews/git'],
+    before  => Package['git'],
     require => File[$credentialhelper]
   }
 
