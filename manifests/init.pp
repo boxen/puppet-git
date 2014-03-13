@@ -8,6 +8,7 @@ class git (
   $configdir               = $git::params::configdir,
   $credentialhelper        = $git::params::credentialhelper,
   $global_credentialhelper = $git::params::global_credentialhelper,
+  $global_excludesfile     = $git::params::global_excludesfile,
 ) inherits git::params {
   include homebrew
   include git::config
@@ -45,7 +46,7 @@ class git (
   }
 
   git::config::global{ 'core.excludesfile':
-    value   => "${configdir}/gitignore",
+    value   => $global_excludesfile,
     require => File["${configdir}/gitignore"]
   }
 

@@ -9,5 +9,6 @@ class git::config inherits git::params {
     $git::params::configdir,
     $git::params::credentialhelper,
     $git::params::global_credentialhelper,
+    $git::params::global_excludesfile,
   ]: }
 }
