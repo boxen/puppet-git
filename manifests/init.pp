@@ -4,6 +4,7 @@
 #
 #   include git
 class git (
+  $package                 = $git::params::package,
   $version                 = $git::params::version,
   $configdir               = $git::params::configdir,
   $credentialhelper        = $git::params::credentialhelper,
@@ -14,10 +15,10 @@ class git (
   include git::config
 
   homebrew::formula { 'git':
-    before => Package['git'],
+    before => Package[$package]
   }
 
-  package { 'git':
+  package { $package:
     ensure => $version
   }
 
@@ -32,7 +33,7 @@ class git (
   file { $global_credentialhelper:
     ensure  => link,
     target  => $credentialhelper,
-    before  => Package['git'],
+    before  => Package[$package],
     require => File[$credentialhelper]
   }
 
