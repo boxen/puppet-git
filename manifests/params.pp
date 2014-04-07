@@ -11,7 +11,7 @@ class git::params {
       $global_excludesfile = "${configdir}/gitignore"
 
       $package = 'boxen/brews/git'
-      $version = '1.9.1'
+      $version = '1.9.1-boxen1'
     }
 
     default: {
