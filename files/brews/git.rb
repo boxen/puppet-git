@@ -6,6 +6,8 @@ class Git < Formula
   sha1 "804453dba489cae0d0f0402888b77e1aaa40bae8"
   head "https://github.com/git/git.git", :shallow => false
 
+  version "1.9.1-boxen1"
+
   bottle do
     sha1 "e9f79d29d1106485c3f0b573098feee60a170155" => :mavericks
     sha1 "cfecf1d47441f6f32e88afabd8e9bccac527dfe0" => :mountain_lion
