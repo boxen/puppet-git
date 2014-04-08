@@ -19,7 +19,7 @@ class git (
   }
 
   package { $package:
-    ensure => $version
+    ensure => $version,
   }
 
   file { $configdir:
