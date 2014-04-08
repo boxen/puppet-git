@@ -20,7 +20,7 @@ class Git < Formula
   option 'with-brewed-curl', "Use Homebrew's version of cURL library"
   option 'with-persistent-https', 'Build git-remote-persistent-https from "contrib" directory'
 
-  depends_on 'pcre' => :optional
+  depends_on 'pcre'
   depends_on 'gettext' => :optional
   depends_on 'openssl' if build.with? 'brewed-openssl'
   depends_on 'curl' if build.with? 'brewed-curl'
@@ -55,10 +55,8 @@ class Git < Formula
 
     ENV['BLK_SHA1'] = '1' if build.with? 'blk-sha1'
 
-    if build.with? 'pcre'
-      ENV['USE_LIBPCRE'] = '1'
-      ENV['LIBPCREDIR'] = Formula['pcre'].opt_prefix
-    end
+    ENV['USE_LIBPCRE'] = '1'
+    ENV['LIBPCREDIR'] = Formula['pcre'].opt_prefix
 
     ENV['NO_GETTEXT'] = '1' if build.without? 'gettext'
 

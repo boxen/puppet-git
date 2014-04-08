@@ -19,8 +19,7 @@ class git (
   }
 
   package { $package:
-    ensure          => $version,
-    install_options => '--with-pcre',
+    ensure => $version,
   }
 
   file { $configdir:
