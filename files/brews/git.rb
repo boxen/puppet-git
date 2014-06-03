@@ -2,16 +2,27 @@ require 'formula'
 
 class Git < Formula
   homepage "http://git-scm.com"
-  url "https://www.kernel.org/pub/software/scm/git/git-1.9.1.tar.gz"
-  sha1 "804453dba489cae0d0f0402888b77e1aaa40bae8"
+  url "https://www.kernel.org/pub/software/scm/git/git-2.0.0.tar.gz"
+  sha1 "d0a7da8b46bc5c63ca68b0eba189dd31f615437c"
+
   head "https://github.com/git/git.git", :shallow => false
 
-  version "1.9.1-boxen1"
+  version "2.0.0-boxen1"
 
   bottle do
-    sha1 "e9f79d29d1106485c3f0b573098feee60a170155" => :mavericks
-    sha1 "cfecf1d47441f6f32e88afabd8e9bccac527dfe0" => :mountain_lion
-    sha1 "87e66620960a1f5a4575cb3b6b0583cfa99f547a" => :lion
+    sha1 "fd9e260685da9033ab3df7d17fbd247ca0735a5f" => :mavericks
+    sha1 "4ca39e18a7e0353d95ac96fad95a8722ada85652" => :mountain_lion
+    sha1 "2daba8156c876d19cf5a766ff6ff2b03b10802f2" => :lion
+  end
+
+  resource "man" do
+    url "https://www.kernel.org/pub/software/scm/git/git-manpages-2.0.0.tar.gz"
+    sha1 "0cac84ebb05cf063bafad8cefd8a1ef786eeeb9c"
+  end
+
+  resource "html" do
+    url "https://www.kernel.org/pub/software/scm/git/git-htmldocs-2.0.0.tar.gz"
+    sha1 "3bfc01de98e3d795c02a1bb639a5e65449b4d7cb"
   end
 
   option 'with-blk-sha1', 'Compile with the block-optimized SHA1 implementation'
@@ -20,21 +31,11 @@ class Git < Formula
   option 'with-brewed-curl', "Use Homebrew's version of cURL library"
   option 'with-persistent-https', 'Build git-remote-persistent-https from "contrib" directory'
 
-  depends_on 'pcre'
+  depends_on 'pcre' => :optional
   depends_on 'gettext' => :optional
   depends_on 'openssl' if build.with? 'brewed-openssl'
   depends_on 'curl' if build.with? 'brewed-curl'
   depends_on 'go' => :build if build.with? 'persistent-https'
-
-  resource "man" do
-    url "https://www.kernel.org/pub/software/scm/git/git-manpages-1.9.1.tar.gz"
-    sha1 "d8cef92bc11696009b64fb6d4936eaa8d7759e7a"
-  end
-
-  resource "html" do
-    url "https://www.kernel.org/pub/software/scm/git/git-htmldocs-1.9.1.tar.gz"
-    sha1 "68aa0c7749aa918e5e98eecd84e0538150613acd"
-  end
 
   def install
     # If these things are installed, tell Git build system to not use them
@@ -45,8 +46,14 @@ class Git < Formula
     ENV['PYTHON_PATH'] = which 'python'
     ENV['PERL_PATH'] = which 'perl'
 
-    if MacOS.version >= :mavericks 
-      ENV['PERLLIB_EXTRA'] = "#{MacOS.active_developer_dir}/Library/Perl/5.16/darwin-thread-multi-2level"
+    if MacOS.version >= :mavericks
+      ENV["PERLLIB_EXTRA"] = %W{
+        #{MacOS.active_developer_dir}
+        /Library/Developer/CommandLineTools
+        /Applications/Xcode.app/Contents/Developer
+      }.uniq.map { |p|
+        "#{p}/Library/Perl/5.16/darwin-thread-multi-2level"
+      }.join(":")
     end
 
     unless quiet_system ENV['PERL_PATH'], '-e', 'use ExtUtils::MakeMaker'
@@ -55,8 +62,10 @@ class Git < Formula
 
     ENV['BLK_SHA1'] = '1' if build.with? 'blk-sha1'
 
-    ENV['USE_LIBPCRE'] = '1'
-    ENV['LIBPCREDIR'] = Formula['pcre'].opt_prefix
+    if build.with? 'pcre'
+      ENV['USE_LIBPCRE'] = '1'
+      ENV['LIBPCREDIR'] = Formula['pcre'].opt_prefix
+    end
 
     ENV['NO_GETTEXT'] = '1' if build.without? 'gettext'
 
