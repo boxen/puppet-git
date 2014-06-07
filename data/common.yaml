@@ -1,0 +1,9 @@
+---
+git::configdir: "/etc/git"
+
+git::package: 'git'
+git::version: '1.8.4'
+
+git::credentialhelper:
+git::global_credentialhelper:
+git::global_excludesfile: "%{hiera('git::configdir')}/gitignore"
