@@ -11,9 +11,21 @@ describe 'git' do
     })
   end
 
+  let(:default_params) do
+    {
+      :configdir               => configdir,
+      :package                 => 'boxen/brews/git',
+      :version                 => '2.0.0-boxen1',
+      :global_credentialhelper => "#{boxenhome}/bin/boxen-git-credential",
+      :credentialhelper        => "#{repodir}/script/boxen-git-credential",
+      :global_excludesfile     => '/opt/boxen/config/git/gitignore'
+    }
+  end
+
+  let(:params) { default_params }
+
   it do
     should include_class('homebrew')
-    should include_class('git::config')
 
     should contain_homebrew__formula('git')
 
@@ -46,11 +58,11 @@ describe 'git' do
   end
 
   context 'when the global_excludesfile parameter is set' do
-    let(:params) {{ :global_excludesfile => '/some/other/file' }}
+    let(:params) { default_params.merge({ :global_excludesfile => '/some/other/file' }) }
 
     it do
       should contain_git__config__global('core.excludesfile').with({
-	:value => '/some/other/file'
+        :value => '/some/other/file'
       })
     end
   end

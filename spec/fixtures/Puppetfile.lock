@@ -18,9 +18,15 @@ GITHUBTARBALL
   specs:
     stdlib (3.0.0)
 
+GITHUBTARBALL
+  remote: ripienaar/puppet-module-data
+  specs:
+    module-data (0.0.1)
+
 DEPENDENCIES
   boxen (= 0.1.8)
   homebrew (= 0.2.0)
   inifile (= 0.0.1)
+  module-data (= 0.0.1)
   stdlib (= 3.0.0)
 

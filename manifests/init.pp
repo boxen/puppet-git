@@ -4,18 +4,20 @@
 #
 #   include git
 class git (
-  $package                 = $git::params::package,
-  $version                 = $git::params::version,
-  $configdir               = $git::params::configdir,
-  $credentialhelper        = $git::params::credentialhelper,
-  $global_credentialhelper = $git::params::global_credentialhelper,
-  $global_excludesfile     = $git::params::global_excludesfile,
-) inherits git::params {
-  include homebrew
-  include git::config
+  $package                 = $git::package,
+  $version                 = $git::version,
+  $configdir               = $git::configdir,
+  $credentialhelper        = $git::credentialhelper,
+  $global_credentialhelper = $git::global_credentialhelper,
+  $global_excludesfile     = $git::global_excludesfile,
+) {
+  if $::osfamily == 'Darwin' {
+    include boxen::config
+    include homebrew
 
-  homebrew::formula { 'git':
-    before => Package[$package]
+    homebrew::formula { 'git':
+      before => Package[$package]
+    }
   }
 
   package { $package:
@@ -26,24 +28,28 @@ class git (
     ensure => directory
   }
 
-  file { $credentialhelper:
-    ensure => file
+  if $credentialhelper {
+    file { $credentialhelper:
+      ensure => file
+    }
   }
 
-  file { $global_credentialhelper:
-    ensure  => link,
-    target  => $credentialhelper,
-    before  => Package[$package],
-    require => File[$credentialhelper]
+  if $global_credentialhelper {
+    file { $global_credentialhelper:
+      ensure  => link,
+      target  => $credentialhelper,
+      before  => Package[$package],
+      require => File[$credentialhelper]
+    }
+
+    git::config::global{ 'credential.helper':
+      value => $global_credentialhelper
+    }
   }
 
   file { "${configdir}/gitignore":
     source  => 'puppet:///modules/git/gitignore',
     require => File[$configdir]
-  }
-
-  git::config::global{ 'credential.helper':
-    value => $global_credentialhelper
   }
 
   git::config::global{ 'core.excludesfile':
