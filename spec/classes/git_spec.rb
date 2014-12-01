@@ -29,7 +29,10 @@ describe 'git' do
 
     should contain_homebrew__formula('git')
 
-    should contain_package('boxen/brews/git').with_ensure('2.3.0')
+    should contain_package('boxen/brews/git').with({
+      :ensure => '2.3.0',
+      :provider => 'homebrew',
+    })
 
     should contain_file(configdir).with_ensure('directory')
 
@@ -55,6 +58,17 @@ describe 'git' do
 
     should_not contain_git__config__global('user.name')
     should_not contain_git__config__global('user.email')
+  end
+
+  context "Linux" do
+    let(:facts) { default_test_facts.merge(:osfamily => 'Linux') }
+
+    it do
+      should contain_package('boxen/brews/git').with({
+        :ensure => '2.3.0',
+        :provider => nil,
+      })
+    end
   end
 
   context 'when the global_excludesfile parameter is set' do

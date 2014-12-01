@@ -18,10 +18,15 @@ class git (
     homebrew::formula { 'git':
       before => Package[$package]
     }
-  }
 
-  package { $package:
-    ensure => $version,
+    package { $package:
+      ensure   => $version,
+      provider => homebrew
+    }
+  } else {
+    package { $package:
+      ensure => $version
+    }
   }
 
   file { $configdir:
