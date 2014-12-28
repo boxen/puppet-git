@@ -18,7 +18,8 @@ describe 'git' do
       :version                 => '2.3.0',
       :global_credentialhelper => "#{boxenhome}/bin/boxen-git-credential",
       :credentialhelper        => "#{repodir}/script/boxen-git-credential",
-      :global_excludesfile     => '/opt/boxen/config/git/gitignore'
+      :global_excludesfile     => '/opt/boxen/config/git/gitignore',
+      :manage_gitignore        => true
     }
   end
 
