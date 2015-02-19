@@ -5,8 +5,6 @@ class Git < Formula
 
   head "https://github.com/git/git.git", :shallow => false
 
-  version "2.3.0-boxen1"
-
   bottle do
     sha1 "53177456ab367faa30e1d49104e8e2c065ac5613" => :yosemite
     sha1 "549b0d4155ad0ca02edb0a55599006da32b21e00" => :mavericks
