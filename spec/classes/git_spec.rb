@@ -81,6 +81,14 @@ describe 'git' do
     end
   end
 
+  context 'when the global_excludesfile parameter is set to false' do
+    let(:params) { default_params.merge({ :global_excludesfile => false }) }
+
+    it do
+      should_not contain_git__config__global('core.excludesfile')
+    end
+  end
+
   context 'when gname fact is set' do
     let(:facts) do
       default_test_facts.merge({
