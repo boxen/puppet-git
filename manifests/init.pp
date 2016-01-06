@@ -57,9 +57,11 @@ class git (
     require => File[$configdir]
   }
 
-  git::config::global{ 'core.excludesfile':
-    value   => $global_excludesfile,
-    require => File["${configdir}/gitignore"]
+  if $global_excludesfile {
+    git::config::global{ 'core.excludesfile':
+      value   => $global_excludesfile,
+      require => File["${configdir}/gitignore"]
+    }
   }
 
   if $::gname {
