@@ -1,25 +1,15 @@
 class Git < Formula
   desc "Distributed revision control system"
   homepage "https://git-scm.com"
-  url "https://www.kernel.org/pub/software/scm/git/git-2.8.1.tar.xz"
-  sha256 "e6626b43ba4bc63ad4918df4c275f50bd7f8af2ab54bde60496ad75e91e927fc"
+  url "https://www.kernel.org/pub/software/scm/git/git-2.8.3.tar.xz"
+  sha256 "7d8e6c274a88b4a73b3c98c70d3438ec12871300ce8bb4ca179ea19fcf74aa91"
 
   head "https://github.com/git/git.git", :shallow => false
 
   bottle do
-    sha256 "15e9c98da9165b7b7b43f25c9ecbcfe3e0be395d249d9c1a54697c0ab0b738f6" => :el_capitan
-    sha256 "d097396945b49f8c93f0dfc4482c447fc82a53301d4761957f8978f44bbd47ab" => :yosemite
-    sha256 "812b1173f6b717fd8cbedea37bfcf3c835c6ef040d80d8a84a54a61b4fe574ca" => :mavericks
-  end
-
-  resource "man" do
-    url "https://www.kernel.org/pub/software/scm/git/git-manpages-2.8.1.tar.xz"
-    sha256 "e7a02f82971f6c0242ce66c9d4708a3ed2449a5b8ecc72fc39d9bad10b4e359d"
-  end
-
-  resource "html" do
-    url "https://www.kernel.org/pub/software/scm/git/git-htmldocs-2.8.1.tar.xz"
-    sha256 "0ef312091a6bc8938d3742be4e95510483a1700ccaeda6e85615f3d7c88d89a8"
+    sha256 "195d68fcdb7a4636a283186756248c67558e521b22f525ca93a28cc964aa8d26" => :el_capitan
+    sha256 "a4de8e2cdc8e6469ccc34069f0a4e311bd6c9fda3ab6e5697a4cada2971019c6" => :yosemite
+    sha256 "73239f5faf3ebd011676a0e45977bafebc355044a3ade5bb45331745edaedbbc" => :mavericks
   end
 
   option "with-blk-sha1", "Compile with the block-optimized SHA1 implementation"
@@ -39,6 +29,16 @@ class Git < Formula
   if build.with? "brewed-svn"
     depends_on "swig"
     depends_on "subversion" => "with-perl"
+  end
+
+  resource "html" do
+    url "https://www.kernel.org/pub/software/scm/git/git-htmldocs-2.8.3.tar.xz"
+    sha256 "df9aa1f374ca49dd65f47a8bb1498c11567d963e30cf00e097aa89c495d3ccde"
+  end
+
+  resource "man" do
+    url "https://www.kernel.org/pub/software/scm/git/git-manpages-2.8.3.tar.xz"
+    sha256 "9d25e10c2bc327fdc59820bb00075799487095059d652fb32fea1cdb3a898bc6"
   end
 
   def install
