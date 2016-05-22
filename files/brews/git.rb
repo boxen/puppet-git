@@ -3,6 +3,7 @@ class Git < Formula
   homepage "https://git-scm.com"
   url "https://www.kernel.org/pub/software/scm/git/git-2.8.3.tar.xz"
   sha256 "7d8e6c274a88b4a73b3c98c70d3438ec12871300ce8bb4ca179ea19fcf74aa91"
+  version "2.8.3-boxen2"
 
   head "https://github.com/git/git.git", :shallow => false
 
