@@ -2,6 +2,6 @@
 git::configdir: "/etc/git"
 
 git::package: 'git'
-git::version: '1.8.4'
+git::version: '2.10.1-boxen2'
 
 git::global_excludesfile: "%{hiera('git::configdir')}/gitignore"
