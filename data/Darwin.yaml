@@ -2,7 +2,7 @@
 git::configdir: "%{::boxen::config::configdir}/git"
 
 git::package: 'boxen/brews/git'
-git::version: '2.10.0'
+git::version: '2.10.1'
 
 git::credentialhelper: "%{::boxen::config::repodir}/script/boxen-git-credential"
 git::global_credentialhelper: "%{boxen::config::home}/bin/boxen-git-credential"
