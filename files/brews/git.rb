@@ -1,16 +1,15 @@
 class Git < Formula
   desc "Distributed revision control system"
   homepage "https://git-scm.com"
-  url "https://www.kernel.org/pub/software/scm/git/git-2.10.0.tar.xz"
-  sha256 "c73364ac00ae85ffc6cfb12ca2700bb0edf30f63262be97be4039be594ff29e7"
+  url "https://www.kernel.org/pub/software/scm/git/git-2.11.0.tar.xz"
+  sha256 "7e7e8d69d494892373b87007674be5820a4bc1ef596a0117d03ea3169119fd0b"
 
   head "https://github.com/git/git.git", :shallow => false
 
   bottle do
-    revision 1
-    sha256 "5c66a52f2c047c8d665ef3d1567ad722f33743b2d03f7eb77565511aa5897a6e" => :el_capitan
-    sha256 "1de14c5c591f8de81b12a520a4b3f6c4da5eadbbcecc4e7284d993d9ece5e58f" => :yosemite
-    sha256 "5e54828d77560d8d9c7faa1cc3aa70d67896e91d91eb21b68332697fc1fa88e7" => :mavericks
+    sha256 "3e57569cb8058b98a9c46fe7cf0e65b2b4007286dd607256446abd5cac0e9d8a" => :sierra
+    sha256 "505487e55a7a38e08c06f8ac301fa33d4c890c10432ffb3bde5a173dd2fa12b8" => :el_capitan
+    sha256 "dc138bfcb944111b4c94f95bd985b8f406ba8fb33e2a449cf641ca5463fee04d" => :yosemite
   end
 
   option "with-blk-sha1", "Compile with the block-optimized SHA1 implementation"
@@ -33,13 +32,13 @@ class Git < Formula
   end
 
   resource "html" do
-    url "https://www.kernel.org/pub/software/scm/git/git-htmldocs-2.10.0.tar.xz"
-    sha256 "b51b7c51c9c50450b233c6461f1987424e8096f05261fc1284bc3c0a8f8da559"
+    url "https://www.kernel.org/pub/software/scm/git/git-htmldocs-2.11.0.tar.xz"
+    sha256 "3975399f1be3d959edf0fded03eab8fbf94787bfd0318b7644c77cf61e4a7b48"
   end
 
   resource "man" do
-    url "https://www.kernel.org/pub/software/scm/git/git-manpages-2.10.0.tar.xz"
-    sha256 "3e17997d10ba18f4ad4dcddf58f7175ee78da1514b5afca3a6f198d957d822f9"
+    url "https://www.kernel.org/pub/software/scm/git/git-manpages-2.11.0.tar.xz"
+    sha256 "b3d3e78829c0b69b727aaca407ecfe239a46db3f354f16189f7a7c10af9528d8"
   end
 
   def install
