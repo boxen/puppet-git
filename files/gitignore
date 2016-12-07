@@ -3,7 +3,8 @@
 .Spotlight-V100
 .Trashes
 ._*
-Icon
+Icon
+
 Thumbs.db
 ehthumbs.db
 *.swp
@@ -13,3 +14,11 @@ ehthumbs.db
 \#*\#
 /tags
 /.bundle/
+
+.php-version
+.AppleDouble
+.LSOverride
+Desktop.ini
+$RECYCLE.BIN/
+.idea
+nbproject
