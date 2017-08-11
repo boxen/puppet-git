@@ -1,14 +1,15 @@
 class Git < Formula
   desc "Distributed revision control system"
   homepage "https://git-scm.com"
-  url "https://www.kernel.org/pub/software/scm/git/git-2.13.0.tar.xz"
-  sha256 "4bbf2ab6f2341253a38f95306ec7936833eb1c42572da5c1fa61f0abb2191258"
+  url "https://www.kernel.org/pub/software/scm/git/git-2.14.1.tar.xz"
+  sha256 "6f724c6d0e9e13114ab35db6f67e1b2c1934b641e89366e6a0e37618231f2cc6"
   head "https://github.com/git/git.git", :shallow => false
+  version "2.14.1-boxen1"
 
   bottle do
-    sha256 "2ea9dc535dd4272dde0e17d3ae05525709f3cba3ed1f0189ee3e65fc95c29c75" => :sierra
-    sha256 "89cf27990304b5a4b51b14d357003e5007b370972fda4fb0fcb220a4a82a84aa" => :el_capitan
-    sha256 "e665c7308b2dd2c2f131058227f91b1024cfc2cf53901e5b544eda19ec0fd93b" => :yosemite
+    sha256 "33de4e36d4d60f7d7281b3ed9d6f1e2e9e4e495da9dd1547c92e70ae330edbeb" => :sierra
+    sha256 "2ee548b022f7e1bb210fa8388328bcca806cc2b0c9c263835957dd3a92fad5d2" => :el_capitan
+    sha256 "96054f0692deece5e4cd78adcf97a04886de3e3681558358647af9f6cf80373d" => :yosemite
   end
 
   option "with-blk-sha1", "Compile with the block-optimized SHA1 implementation"
@@ -21,8 +22,9 @@ class Git < Formula
   deprecated_option "with-brewed-openssl" => "with-openssl"
   deprecated_option "with-brewed-curl" => "with-curl"
   deprecated_option "with-brewed-svn" => "with-subversion"
+  deprecated_option "with-pcre" => "with-pcre2"
 
-  depends_on "pcre" => :optional
+  depends_on "pcre2" => :optional
   depends_on "gettext" => :optional
   depends_on "openssl" => :optional
   depends_on "curl" => :optional
@@ -37,13 +39,13 @@ class Git < Formula
   end
 
   resource "html" do
-    url "https://www.kernel.org/pub/software/scm/git/git-htmldocs-2.13.0.tar.xz"
-    sha256 "d5ddfb8eedd5a53c0e46e183ed1513dbdd4f5d5e7ef6624040ba0b7381221e3a"
+    url "https://www.kernel.org/pub/software/scm/git/git-htmldocs-2.14.1.tar.xz"
+    sha256 "9c1970c7f87f37c8b3044e01e0500d84d8bc4eb4dfa5ca881c32c351f20769fb"
   end
 
   resource "man" do
-    url "https://www.kernel.org/pub/software/scm/git/git-manpages-2.13.0.tar.xz"
-    sha256 "8414f9c62e2b099cd0ea2ca22c55fb6538b13fc7a3ed1508fb9881aae42a97c9"
+    url "https://www.kernel.org/pub/software/scm/git/git-manpages-2.14.1.tar.xz"
+    sha256 "7ebce1e0e862af1367e24f14765c7b67f08b63fb01b80949f55479c562d414f2"
   end
 
   def install
@@ -80,13 +82,12 @@ class Git < Formula
     end
 
     ENV["BLK_SHA1"] = "1" if build.with? "blk-sha1"
-
-    if build.with? "pcre"
-      ENV["USE_LIBPCRE"] = "1"
-      ENV["LIBPCREDIR"] = Formula["pcre"].opt_prefix
-    end
-
     ENV["NO_GETTEXT"] = "1" if build.without? "gettext"
+
+    if build.with? "pcre2"
+      ENV["USE_LIBPCRE2"] = "1"
+      ENV["LIBPCREDIR"] = Formula["pcre2"].opt_prefix
+    end
 
     args = %W[
       prefix=#{prefix}
@@ -112,6 +113,11 @@ class Git < Formula
                      "LDFLAGS=#{ENV.ldflags}"
       bin.install "git-credential-osxkeychain"
       system "make", "clean"
+    end
+
+    # Generate diff-highlight perl script executable
+    cd "contrib/diff-highlight" do
+      system "make"
     end
 
     # Install the netrc credential helper
