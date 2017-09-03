@@ -5,3 +5,4 @@ git::package: 'git'
 git::version: '1.8.4'
 
 git::global_excludesfile: "%{hiera('git::configdir')}/gitignore"
+git::manage_gitignore: true
