@@ -10,6 +10,7 @@ class git (
   $credentialhelper        = $git::credentialhelper,
   $global_credentialhelper = $git::global_credentialhelper,
   $global_excludesfile     = $git::global_excludesfile,
+  $manage_gitignore        = $git::manage_gitignore,
 ) {
   if $::osfamily == 'Darwin' {
     include boxen::config
@@ -52,15 +53,21 @@ class git (
     }
   }
 
-  file { "${configdir}/gitignore":
-    source  => 'puppet:///modules/git/gitignore',
-    require => File[$configdir]
-  }
+  if $manage_gitignore {
+    file { "${configdir}/gitignore":
+      source  => 'puppet:///modules/git/gitignore',
+      require => File[$configdir]
+    }
 
-  if $global_excludesfile {
+    if $global_excludesfile {
+      git::config::global{ 'core.excludesfile':
+        value   => $global_excludesfile,
+        require => File["${configdir}/gitignore"]
+      }
+    }
+  } else {
     git::config::global{ 'core.excludesfile':
       value   => $global_excludesfile,
-      require => File["${configdir}/gitignore"]
     }
   }
 

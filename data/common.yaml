@@ -5,3 +5,4 @@ git::package: 'git'
 git::version: '2.10.1-boxen2'
 
 git::global_excludesfile: "%{hiera('git::configdir')}/gitignore"
+git::manage_gitignore: true
