@@ -15,7 +15,7 @@ describe 'git' do
     {
       :configdir               => configdir,
       :package                 => 'boxen/brews/git',
-      :version                 => '2.3.0',
+      :version                 => '2.10.1-boxen2',
       :global_credentialhelper => "#{boxenhome}/bin/boxen-git-credential",
       :credentialhelper        => "#{repodir}/script/boxen-git-credential",
       :global_excludesfile     => '/opt/boxen/config/git/gitignore',
@@ -26,12 +26,12 @@ describe 'git' do
   let(:params) { default_params }
 
   it do
-    should include_class('homebrew')
+    should contain_class('homebrew')
 
     should contain_homebrew__formula('git')
 
     should contain_package('boxen/brews/git').with({
-      :ensure => '2.3.0',
+      :ensure => '2.10.1-boxen2',
       :provider => 'homebrew',
     })
 
@@ -66,7 +66,7 @@ describe 'git' do
 
     it do
       should contain_package('boxen/brews/git').with({
-        :ensure => '2.3.0',
+        :ensure => '2.10.1-boxen2',
         :provider => nil,
       })
     end
