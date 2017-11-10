@@ -1,4 +1,3 @@
 source "https://rubygems.org"
 
-gem "cardboard", "~> 1.0"
-gem "rake"
+gem "cardboard", "~> 2.1.0"

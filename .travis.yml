@@ -1,5 +1,4 @@
 ---
-sudo: false
 script: "./script/cibuild"
 gemfile: "this/does/not/exist"
 rvm:

@@ -26,7 +26,7 @@ describe 'git' do
   let(:params) { default_params }
 
   it do
-    should include_class('homebrew')
+    should contain_class('homebrew')
 
     should contain_homebrew__formula('git')
 
