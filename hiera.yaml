@@ -1,0 +1,11 @@
+---
+version: 5
+hierarchy:
+  - name: "osfamily + version"
+    path: "%{::osfamily}/%{::macosx_productversion_major}.yaml"
+  - name: "osfamily + lsbdistcodename"
+    path: "%{::osfamily}/%{::lsbdistcodename}.yaml"
+  - name: "osfamily"
+    path: "%{::osfamily}.yaml"
+  - name: "common"
+    path: "common.yaml"
